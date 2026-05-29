@@ -1,4 +1,4 @@
-### DocChat — RAG-Powered PDF Assistant
+# DocChat — RAG-Powered PDF Assistant
 
 Upload any PDF and ask questions. Answers are grounded in the document using a RAG pipeline.
 
