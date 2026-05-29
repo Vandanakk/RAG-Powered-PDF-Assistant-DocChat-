@@ -1,0 +1,13 @@
+# Ignore Python virtual environments and caches
+venv/
+__pycache__/
+*.pyc
+
+# Ignore our local vector database files
+.env
+chroma_data/
+
+# Ignore temporary uploaded files
+temp_*
+sample.pdf
+
