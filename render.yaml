@@ -1,0 +1,24 @@
+# Render Blueprint specification for DocChat FastAPI Backend
+# Documentation: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: docchat-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: GEMINI_API_KEY
+        sync: false # Set securely in Render dashboard
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: TOP_K_CHUNKS
+        value: "5"
+      - key: CORS_ORIGINS
+        sync: false # Add your Vercel frontend URL, e.g. https://your-docchat.vercel.app

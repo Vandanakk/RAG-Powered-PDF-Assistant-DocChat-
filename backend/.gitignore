@@ -1,0 +1,21 @@
+# Virtual environments
+venv/
+ENV/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Local data & vector store
+data/
+chroma_data/

@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer
 import os
 from dotenv import load_dotenv
 load_dotenv()
-print("KEY LOADED:", os.environ.get("GEMINI_API_KEY"))
+print("KEY LOADED:", bool(os.environ.get("GEMINI_API_KEY")))
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 SAMPLE_PDF = "sample.pdf"
 client = genai.Client(api_key=GEMINI_API_KEY)

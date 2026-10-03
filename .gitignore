@@ -1,13 +1,31 @@
-# Ignore Python virtual environments and caches
+# Python
 venv/
 __pycache__/
 *.pyc
+*.pyo
+.pytest_cache/
+.coverage
 
-# Ignore our local vector database files
+# Environment
 .env
-chroma_data/
+.env.*
+!.env.example
 
-# Ignore temporary uploaded files
+# Vector Database and Application Data
+chroma_data/
+data/
+backend/data/
+
+# Temporary and test files
 temp_*
 sample.pdf
+*.tmp
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+node_modules/
+dist/
+.DS_Store
+
 

@@ -24,7 +24,7 @@ collection.add(embeddings = embeddings,
                documents=paragraphs,
                ids=ids)
 
-print("We indexed {len(paragraphs)} chunks into ChromaDB")
+print(f"We indexed {len(paragraphs)} chunks into ChromaDB")
 
 query_text = "Tell me about space missions to the moon"
 query_vector = model.encode(query_text).tolist()
