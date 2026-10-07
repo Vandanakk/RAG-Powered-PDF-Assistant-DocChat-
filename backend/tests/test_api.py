@@ -271,7 +271,7 @@ def test_selected_document_retrieval(client, monkeypatch):
 
     rag_service = get_rag_service()
     mock_llm = MagicMock()
-    mock_llm.generate_grounded_answer.side_effect = lambda question, context: f"Answer using: {context}"
+    mock_llm.generate_grounded_answer.side_effect = lambda question, context, **kwargs: f"Answer using: {context}"
     monkeypatch.setattr(rag_service, "llm_service", mock_llm)
 
     # Ask with selected doc1_id
@@ -313,7 +313,7 @@ def test_broad_overview_question_retrieval(client, monkeypatch):
     rag_service = get_rag_service()
     captured_context = []
     mock_llm = MagicMock()
-    def fake_generate(question, context):
+    def fake_generate(question, context, **kwargs):
         captured_context.append(context)
         return "The topic of this BTP is Knowledge-Guided Patient-Condition Severity Prediction."
     mock_llm.generate_grounded_answer.side_effect = fake_generate

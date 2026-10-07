@@ -138,7 +138,7 @@ class Settings:
     _cors_env = os.getenv("CORS_ORIGINS", "")
     CORS_ORIGINS: list = parse_cors_origins(_cors_env)
     _cors_regex_env = os.getenv("CORS_ORIGIN_REGEX", "")
-    CORS_ORIGIN_REGEX: str = _cors_regex_env if _cors_regex_env else r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$"
+    CORS_ORIGIN_REGEX: str = _cors_regex_env if _cors_regex_env else r"^https?://(localhost|127\.0\.0\.1)(:\d+)?$|^https://.*\.vercel\.app$|^https://.*\.onrender\.com$"
 
 settings = Settings()
 

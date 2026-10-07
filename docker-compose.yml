@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  docchat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: docchat-app
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_MODEL=gemini-2.5-flash
+      - TOP_K_CHUNKS=5
+      - DATA_DIR=/app/data
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:8000
+    volumes:
+      - docchat_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  docchat_data:
+    driver: local
