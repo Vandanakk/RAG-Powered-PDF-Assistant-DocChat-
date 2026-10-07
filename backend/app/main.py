@@ -36,8 +36,9 @@ app.add_middleware(
     max_age=600,
 )
 
-# Include API router under /api
+# Include API router under /api and root for robust client compatibility
 app.include_router(api_router, prefix="/api")
+app.include_router(api_router)
 
 # Also provide direct health check at root /health
 @app.get("/health", tags=["Health"])

@@ -10,10 +10,11 @@ import type {
 } from '../types';
 
 const resolveApiBaseUrl = (): string => {
-  let url = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api').trim();
+  let url = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000').trim();
   url = url.replace(/\/+$/, '');
-  if (!url.endsWith('/api')) {
-    url = `${url}/api`;
+  // Strip trailing '/api' from base URL if present to avoid double '/api/api' with explicit endpoints
+  if (url.endsWith('/api')) {
+    url = url.slice(0, -4);
   }
   return url;
 };
@@ -59,7 +60,7 @@ export const uploadDocument = async (
 
   try {
     const response = await apiClient.post<DocumentUploadResponse>(
-      '/documents/upload',
+      '/api/documents/upload',
       formData,
       {
         headers: {
@@ -76,7 +77,7 @@ export const uploadDocument = async (
 
 export const getDocuments = async (): Promise<DocumentInfo[]> => {
   try {
-    const response = await apiClient.get<DocumentInfo[]>('/documents');
+    const response = await apiClient.get<DocumentInfo[]>('/api/documents');
     return response.data;
   } catch (error) {
     throw new Error(getErrorMessage(error));
@@ -85,7 +86,7 @@ export const getDocuments = async (): Promise<DocumentInfo[]> => {
 
 export const deleteDocument = async (documentId: string): Promise<DocumentDeleteResponse> => {
   try {
-    const response = await apiClient.delete<DocumentDeleteResponse>(`/documents/${documentId}`);
+    const response = await apiClient.delete<DocumentDeleteResponse>(`/api/documents/${documentId}`);
     return response.data;
   } catch (error) {
     throw new Error(getErrorMessage(error));
@@ -98,7 +99,7 @@ export const askQuestion = async (
   history?: ChatHistoryItem[]
 ): Promise<ChatResponse> => {
   try {
-    const response = await apiClient.post<ChatResponse>('/chat', {
+    const response = await apiClient.post<ChatResponse>('/api/chat', {
       document_id: documentId,
       question: question.trim(),
       history: history && history.length > 0 ? history : undefined,
@@ -111,7 +112,7 @@ export const askQuestion = async (
 
 export const checkHealth = async (): Promise<HealthResponse> => {
   try {
-    const response = await apiClient.get<HealthResponse>('/health');
+    const response = await apiClient.get<HealthResponse>('/api/health');
     return response.data;
   } catch (error) {
     throw new Error(getErrorMessage(error));
